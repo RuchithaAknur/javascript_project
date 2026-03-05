@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hospital Management System</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: white;
+    background-image:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url("https://cdn.pixabay.com/photo/2024/04/10/00/46/hospital-8687007_1280.jpg");
+    background-attachment: fixed;
+}
+#home .card {
+    width: 50%;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+
+section {
+    display: none;
+    padding: 100px 7% 60px;
+    min-height: 100vh;
+}
+.active { display: block; }
+
+/* NAVBAR */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4cffc1;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    margin-left: -10px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.nav-links a:hover {
+    color: #4cffc1;
+    transform: scale(1.1);
+}
+
+/* CARDS */
+#doctors .card {
+    width: 50%;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+.card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 30px 50px rgba(0,0,0,0.6);
+}
+
+/* DOCTORS */
+.doctor-grid {
+   display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+.doctor {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+/* COMMON FORM */
+#search .card {
+    width: 60%;          /* Reduce width */
+    max-width: 700px;    /* Optional limit */
+    margin: auto;        /* Center it */
+    padding: 20px;       /* Reduce inside space */
+}
+#contact .card{
+     width: 60%;          /* Reduce width */
+    max-width: 700px;    /* Optional limit */
+    margin: top;        /* Center it */
+    padding: 20px; 
+}
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+button {
+    background: #4cffc1;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover { background: #39d6a2; }
+
+/* ===== BOOK APPOINTMENT ===== */
+#appointment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#appointment .card {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 25px;
+    padding: 35px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6);
+}
+
+#appointment h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4cffc1;
+    letter-spacing: 1px;
+}
+
+#appointment input,
+#appointment select {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">🏥 CityCare Hospital</div>
+    <div class="nav-links">
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('doctors')">Doctors</a>
+        <a onclick="showSection('search')">Search</a>
+        <a onclick="showSection('appointment')">Book Appointment</a>
+        <a onclick="showSection('contact')">Contact Us  uss</a>
+    </div>
+</nav>
+
+<section id="home" class="active">
+    <div class="card">
+        <h1>Welcome to CityCare Hospital</h1>
+        <p>Advanced healthcare with expert doctors and 24/7 support.</p>
+    </div>
+</section>
+
+<section id="doctors">
+    <div class="card">
+        <h2>Our Specialists</h2>
+        <div class="doctor-grid">
+            <div class="doctor">Cardiologist</div>
+            <div class="doctor">Neurologist</div>
+            <div class="doctor">Orthopedic</div>
+            <div class="doctor">Dermatologist</div>
+            <div class="doctor">Pediatrician</div>
+            <div class="doctor">Gynecologist</div>
+            <div class="doctor">ENT Specialist</div>
+            <div class="doctor">Psychiatrist</div>
+            <div class="doctor">Dentist</div>
+            <div class="doctor">General Physician</div>
+        </div>
+    </div>
+</section>
+
+<section id="search">
+    <div class="card">
+        <h2>Search Medicine</h2>
+        <input type="text" id="symptom" placeholder="Enter symptom">
+        <button onclick="findMedicine()">Search</button>
+        <p id="medicineResult"></p>
+    </div>
+</section>
+
+<center>
+    <section id="contact">
+    <div class="card">
+        <p>📍 Hyderabad, India</p>
+        <p>📞 +91 98765 43210</p>
+        <p>📧 support@citycarehospital.com</p>
+    </div>
+</section>
+</center>
+<section id="appointment">
+    <div class="card">
+        <h2>Book Appointment</h2>
+        <input id="pname" placeholder="Patient Name">
+        <input id="age" type="number" placeholder="Age">
+        <select id="specialist">
+            <option value="">Select Specialist</option>
+            <option>Cardiologist</option>
+            <option>Neurologist</option>
+            <option>Orthopedic</option>
+            <option>Dermatologist</option>
+            <option>Pediatrician</option>
+        </select>
+        <input id="date" type="date">
+        <button onclick="bookAppointment()">Confirm Appointment</button>
+    </div>
+</section>
+
+
+<script>
+function showSection(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    console.log("trigger",id)
+    document.getElementById(id).classList.add("active");
+}
+
+function findMedicine() {
+    const s = symptom.value.toLowerCase();
+    let m = "Consult a doctor";
+    if (s.includes("fever")) m = "Paracetamol";
+    else if (s.includes("cold")) m = "Cetirizine";
+    else if (s.includes("pain")) m = "Ibuprofen";
+    medicineResult.innerText = "Suggested: " + m;
+}
+
+function bookAppointment() {
+    if(!pname.value || !age.value || !specialist.value || !date.value){
+        alert("Please fill all details");
+        return;
+    }
+    alert("✅ Appointment Confirmed for " + pname.value);
+}
+
+
+</script>
+
+</body>
+</html>
